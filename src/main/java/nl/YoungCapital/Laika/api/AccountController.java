@@ -3,6 +3,8 @@ package nl.YoungCapital.Laika.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,24 +12,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import nl.YoungCapital.Laika.domain.Account;
+import nl.YoungCapital.Laika.service.AccountService;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/account")
 public class AccountController {
-
-	private List<Account> accounts = new ArrayList<Account>();
 	
-	@GetMapping
-	public List<Account> findAll() {
+	@Autowired
+	AccountService accountService;
+	
+	@GetMapping(path="get")
+	public Iterable<Account> findAll() {
 		
-		return this.accounts;
+		return accountService.findAll();
 	}
 	
-	@PostMapping
+	@PostMapping(path="create")
 	public Account create(@RequestBody Account input) {
 		
-		this.accounts.add(input);
-		return accounts.get(accounts.size()-1);
+		return accountService.save(input);
+		
 		
 	}
 }

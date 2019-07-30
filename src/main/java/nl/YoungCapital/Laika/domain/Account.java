@@ -1,22 +1,45 @@
 package nl.YoungCapital.Laika.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Account {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
 	private String firstname;
 	private String lastname;
 	
+	private String username;
+	private String password;
 	private String email;
 	
-	private String street;
-	private int houseNumber;
-	private String zipcode;
-	private String city;
+	@ManyToOne
+	Adress adress;
 	
-	private Wallet wallet;
+	@OneToOne
+	Wallet wallet;	
 
-	//Getters en setters voor de fields
+	//no-args Constructor
+	public Account() {
+		
+	}
+	
+	//Constructor
+	public Account(String username, String password, String email) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+	}
+
+	/*Getters en setters voor de fields*/
 	public long getId() {
 		return id;
 	}
@@ -49,37 +72,30 @@ public class Account {
 		this.email = email;
 	}
 
-	public String getStreet() {
-		return street;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public int getHouseNumber() {
-		return houseNumber;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setHouseNumber(int houseNumber) {
-		this.houseNumber = houseNumber;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getZipcode() {
-		return zipcode;
+	public Adress getAdress() {
+		return adress;
 	}
 
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
+	public void setAdress(Adress adress) {
+		this.adress = adress;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
 
 	public Wallet getWallet() {
 		return wallet;
