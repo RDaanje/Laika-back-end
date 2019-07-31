@@ -22,23 +22,16 @@ public class Account {
 	private String email;
 	
 	@ManyToOne
-	Adress adress;
+	private Adress adress;
 	
 	@OneToOne
-	Wallet wallet;	
+	private Wallet wallet;	
 
 	//no-args Constructor
 	public Account() {
 		
 	}
 	
-	//Constructor
-	public Account(String username, String password, String email) {
-		this.username = username;
-		this.password = password;
-		this.email = email;
-	}
-
 	/*Getters en setters voor de fields*/
 	public long getId() {
 		return id;
