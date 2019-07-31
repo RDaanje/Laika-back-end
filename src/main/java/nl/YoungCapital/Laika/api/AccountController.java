@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import nl.YoungCapital.Laika.domain.Account;
 import nl.YoungCapital.Laika.service.AccountService;
 
+
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "api/account", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "api/account", produces = MediaType.APPLICATION_JSON_VALUE)
 
 public class AccountController {
 
@@ -31,7 +32,7 @@ public class AccountController {
 		return accountService.findAll();
 	}
 
-	@RequestMapping(path= "{id}", method=RequestMethod.GET)
+	@GetMapping(path= "{id}")
 	public Optional<Account> findById(@PathVariable Long id) {
 
 		return accountService.findById(id);
@@ -42,6 +43,10 @@ public class AccountController {
 	public Account create(@RequestBody Account input) {
 
 		return accountService.save(input);
+		
+
 
 	}
+	
+	
 }
