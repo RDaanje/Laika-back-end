@@ -58,8 +58,10 @@ public class AccountController {
 	@PutMapping(path= "{id}/update")
 	public Account accountUpdate(@PathVariable long id, @RequestBody Account account) {
 		Optional<Account> accountCheck = accountService.findById(account.getId());
+		
 		accountCheck.get().setFirstname(account.getFirstname());
 		accountCheck.get().setLastname(account.getLastname());
+		
 		
 		return accountService.save(account);
 	} 

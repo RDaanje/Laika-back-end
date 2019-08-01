@@ -21,9 +21,47 @@ public class Account {
 	private String password;
 	private String email;
 	
-	@ManyToOne
-	private Adress adress;
+	private String street;
+	private String houseNumber;
+	private String zipcode;
+	private String city;
 	
+	
+//	@ManyToOne
+//	private Adress adress;
+	
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	@OneToOne
 	private Wallet wallet;	
 
@@ -81,14 +119,7 @@ public class Account {
 		this.password = password;
 	}
 
-	public Adress getAdress() {
-		return adress;
-	}
-
-	public void setAdress(Adress adress) {
-		this.adress = adress;
-	}
-
+	
 
 	public Wallet getWallet() {
 		return wallet;
