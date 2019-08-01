@@ -23,7 +23,6 @@ public class AccountService {
 	}
 	
 	
-	
 	// Returns a specific account
 	public Optional<Account> findById(Long id) {
 		return accountrepository.findById(id);
@@ -35,13 +34,17 @@ public class AccountService {
 	}
 
 	// Returns an account with a specific username
-	public Iterable<Account> findByUsername(String username) {
+	public Optional<Account> findByUsername(String username) {
 		return accountrepository.findByUsername(username);
 	}
 
 	// Returns an account with a specific email
 	public Iterable<Account> findByEmail(String email) {
 		return accountrepository.findByEmail(email);
+	}
+	
+	public Iterable<Account> findByUsernamePassword(String username, String password) {
+		return accountrepository.findByUsernameAndPassword(username, password);
 	}
 
 	// Deletes an account (optionele functie)
