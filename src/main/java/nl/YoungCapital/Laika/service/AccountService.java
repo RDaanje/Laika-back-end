@@ -52,4 +52,8 @@ public class AccountService {
 		accountrepository.deleteById(id);
 	}
 
+	public Iterable<Account> findByUsernameAndPassword(String username, String password) {
+		return accountrepository.findByUsernameAndPassword(username, password);
+	}
+
 }

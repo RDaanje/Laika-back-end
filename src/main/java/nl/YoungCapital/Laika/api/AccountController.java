@@ -29,11 +29,19 @@ public class AccountController {
 	@Autowired
 	AccountService accountService;
 
+	@GetMapping(path = "get/{username}/{password}")
+	public Iterable<Account> findByUsernameAndPassword(@PathVariable("username") String username, @PathVariable("password")String password) {
+
+		return accountService.findByUsernameAndPassword(username, password);
+	}
+	
 	@GetMapping(path = "get")
 	public Iterable<Account> findAll() {
 
 		return accountService.findAll();
 	}
+
+	@RequestMapping(path= "get/{id}", method=RequestMethod.GET)
 
 	@GetMapping(path= "{id}")
 	public Optional<Account> findById(@PathVariable Long id) {
