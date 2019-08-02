@@ -38,10 +38,9 @@ public class AccountService {
 	}
 
 	// Returns an account with a specific email
-	public Iterable<Account> findByEmail(String email) {
+	public Optional<Account> findByEmail(String email) {
 		return accountrepository.findByEmail(email);
 	}
-
 	// Deletes an account (optionele functie)
 	public void deleteById(Long id) {
 		accountrepository.deleteById(id);
