@@ -28,11 +28,17 @@ public class AccountController {
 
 	@Autowired
 	AccountService accountService;
+	
+	@GetMapping(path = "playgame")
+	public void playGame() {
+		
+	}
 
 	@GetMapping(path = "get/{username}/{password}")
 	public ResponseEntity<Account> findByUsernameAndPassword(@PathVariable("username") String username, @PathVariable("password")String password) {
 		Optional<Account> accountCheck = accountService.findByUsernameAndPassword(username, password);
-		if (!accountCheck.isPresent())	{
+		System.out.println(accountCheck);
+		if (!accountCheck.isPresent() )	{
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			
 		} else { 
