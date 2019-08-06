@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import nl.YoungCapital.Laika.domain.Account;
+import nl.YoungCapital.Laika.domain.Wallet;
 
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long>{
@@ -18,7 +19,7 @@ public interface AccountRepository extends CrudRepository<Account, Long>{
 	@Query
 	Optional<Account> findByUsernameAndPassword(String username, String password);
 
-
+	
 	
 	 
 	

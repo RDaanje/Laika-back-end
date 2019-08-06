@@ -1,11 +1,13 @@
 package nl.YoungCapital.Laika.domain;
 
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
 
 @Entity
 public class Account {
@@ -26,6 +28,8 @@ public class Account {
 	private String zipcode;
 	private String city;
 	
+	@OneToOne(cascade = {CascadeType.ALL})				//navragen!
+	private Wallet wallet;
 	
 //	@ManyToOne
 //	private Adress adress;
@@ -61,9 +65,6 @@ public class Account {
 	public void setCity(String city) {
 		this.city = city;
 	}
-
-	@OneToOne
-	private Wallet wallet;	
 
 	//no-args Constructor
 	public Account() {
@@ -119,7 +120,6 @@ public class Account {
 		this.password = password;
 	}
 
-	
 
 	public Wallet getWallet() {
 		return wallet;
@@ -129,5 +129,5 @@ public class Account {
 		this.wallet = wallet;
 	}
 	
-	
+		
 }
