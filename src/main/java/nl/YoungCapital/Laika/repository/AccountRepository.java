@@ -7,15 +7,24 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import nl.YoungCapital.Laika.domain.Account;
+import nl.YoungCapital.Laika.domain.Wallet;
 
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long>{
 
 	Optional<Account> findByUsername(String username);
 	
-	Iterable<Account> findByEmail(String email);
+	Optional<Account> findByEmail(String email);
 
 	@Query
+<<<<<<< HEAD
 	Iterable<Account> findByUsernameAndPassword(String username, String password);
+=======
+	Optional<Account> findByUsernameAndPassword(String username, String password);
+
+	
+	
+	 
+>>>>>>> master
 	
 }
