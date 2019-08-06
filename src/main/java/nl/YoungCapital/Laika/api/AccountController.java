@@ -3,7 +3,9 @@ package nl.YoungCapital.Laika.api;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +28,23 @@ public class AccountController {
 
 	@Autowired
 	AccountService accountService;
+	
+	@GetMapping(path = "playgame")
+	public void playGame() {
+		
+	}
 
 	@GetMapping(path = "get/{username}/{password}")
-	public Iterable<Account> findByUsernameAndPassword(@PathVariable("username") String username, @PathVariable("password")String password) {
-
-		return accountService.findByUsernameAndPassword(username, password);
+	public ResponseEntity<Account> findByUsernameAndPassword(@PathVariable("username") String username, @PathVariable("password")String password) {
+		Optional<Account> accountCheck = accountService.findByUsernameAndPassword(username, password);
+		System.out.println(accountCheck);
+		if (!accountCheck.isPresent() )	{
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			
+		} else { 
+			Account accountOk = accountCheck.get();
+			return new ResponseEntity<Account>(accountOk, HttpStatus.OK);			
+		}
 	}
 	
 	@GetMapping(path = "get")
@@ -39,19 +53,24 @@ public class AccountController {
 		return accountService.findAll();
 	}
 
-
 	@GetMapping(path= "{id}")
 	public Optional<Account> findById(@PathVariable Long id) {
 
 		return accountService.findById(id);
 	}
-
 	
-	@GetMapping
-	public Iterable<Account> findByUsernameAndPassword(@RequestBody Account account) {
-		return accountService.findByUsernamePassword(account.getUsername(), account.getPassword());
+	@GetMapping(path = "/forgot/{email}")
+	public ResponseEntity<Account> findByEmail(@PathVariable String email)	{
+		Optional<Account> accountCheck = accountService.findByEmail(email);
+		if (!accountCheck.isPresent()) {
+			return new ResponseEntity<Account>(HttpStatus.NOT_FOUND);
+			
+		} else {
+			Account accountOk = accountCheck.get();
+			return new ResponseEntity<Account>(accountOk, HttpStatus.OK);
+		}
 	}
-	
+
 	@PutMapping(path= "{id}/update")
 	public Account accountUpdate(@PathVariable long id, @RequestBody Account account) {
 		Optional<Account> accountCheck = accountService.findById(account.getId());
@@ -64,9 +83,21 @@ public class AccountController {
 	} 
 	
 	@PostMapping(path = "create")
-	public Account create(@RequestBody Account input) {
+	public ResponseEntity<Account> create(@RequestBody Account input) {
 
-		return accountService.save(input);
+		Optional<Account> accountCheck = accountService.findByUsername(input.getUsername());
+		Optional<Account> accountCheck2 = accountService.findByEmail(input.getEmail());
+		
+		if (accountCheck.isPresent()) {
+			return new ResponseEntity<Account>(HttpStatus.CONFLICT);
+		} else if (accountCheck2.isPresent()){ 
+			return new ResponseEntity<Account>(HttpStatus.FOUND);
+		} else {
+			return new ResponseEntity<Account>(accountService.save(input), HttpStatus.OK);
+		}
+		
+		
+		
 	}
 	
 	@PutMapping(path="{id}/{email}")
