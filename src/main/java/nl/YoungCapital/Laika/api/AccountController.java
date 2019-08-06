@@ -11,48 +11,67 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import nl.YoungCapital.Laika.domain.Account;
 import nl.YoungCapital.Laika.service.AccountService;
 
+
+
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "api/account", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "api/account", produces = MediaType.APPLICATION_JSON_VALUE)
 
 public class AccountController {
 
 	@Autowired
 	AccountService accountService;
 
+//	@GetMapping(path = "get/{username}/{password}")
+//	public Iterable<Account> findByUsernameAndPassword(@PathVariable("username") String username, @PathVariable("password")String password) {
+//
+//		return accountService.findByUsernameAndPassword(username, password);
+//	}
+	
 	@GetMapping(path = "get")
 	public Iterable<Account> findAll() {
 
 		return accountService.findAll();
 	}
-//	@RequestMapping(path= "{id}", method=RequestMethod.GET)
+
 	@GetMapping(path= "{id}")
 	public Optional<Account> findById(@PathVariable Long id) {
 
 		return accountService.findById(id);
 	}
-	
-	@GetMapping(path= "forgotpassword/{email}")
-	public Optional<Account> findByEmail(@PathVariable String email){
-		return accountService.findByEmail(email);
-	}
-	
-//	@GetMapping(path= "forgotusername/{email}")
-//	public Optional<Account> findByEmail(@PathVariable String email){
+
+//	@GetMapping(path= "forgotpassword/{email}")
+//	public Iterable<Account> findByEmail(@PathVariable String email){
 //		return accountService.findByEmail(email);
 //	}
+//
+//
+//	
+//	@GetMapping
+//	public Iterable<Account> findByUsernameAndPassword(@RequestBody Account account) {
+//		return accountService.findByUsernamePassword(account.getUsername(), account.getPassword());
+//	}
+	
+//	@PutMapping(path= "{id}/update")
+//	public Account accountUpdate(@PathVariable long id, @RequestBody Account account) {
+//		Optional<Account> accountCheck = accountService.findById(account.getId());
+//		
+//		accountCheck.get().setFirstname(account.getFirstname());
+//		accountCheck.get().setLastname(account.getLastname());
+//		
+//		
+//		return accountService.save(account);
+//	} 
 	
 	@PostMapping(path = "create")
 	public Account create(@RequestBody Account input) {
 
 		return accountService.save(input);
-
 	}
 	
 	@PutMapping(path = "{id}/{email}")
@@ -60,4 +79,5 @@ public class AccountController {
 		accountService.findById(id).get().setEmail(email);
 		return accountService.findById(id);
 	}
+
 }

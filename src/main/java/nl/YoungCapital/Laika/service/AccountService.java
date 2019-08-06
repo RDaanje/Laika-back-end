@@ -18,9 +18,10 @@ public class AccountService {
 	AccountRepository accountrepository;
 
 	// Creates an account
-	public Account save(Account account) {
+	public Account save(Account account) {		
 		return accountrepository.save(account);
 	}
+	
 	
 	// Returns a specific account
 	public Optional<Account> findById(Long id) {
@@ -33,17 +34,26 @@ public class AccountService {
 	}
 
 	// Returns an account with a specific username
-	public Iterable<Account> findByUsername(String username) {
+	public Optional<Account> findByUsername(String username) {
 		return accountrepository.findByUsername(username);
 	}
 
 	// Returns an account with a specific email
-	public Optional<Account> findByEmail(String email) {
+	public Iterable<Account> findByEmail(String email) {
 		return accountrepository.findByEmail(email);
 	}
+	
+	public Iterable<Account> findByUsernamePassword(String username, String password) {
+		return accountrepository.findByUsernameAndPassword(username, password);
+	}
+
 	// Deletes an account (optionele functie)
 	public void deleteById(Long id) {
 		accountrepository.deleteById(id);
+	}
+
+	public Iterable<Account> findByUsernameAndPassword(String username, String password) {
+		return accountrepository.findByUsernameAndPassword(username, password);
 	}
 
 }
