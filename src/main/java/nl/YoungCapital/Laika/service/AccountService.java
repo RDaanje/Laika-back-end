@@ -2,6 +2,7 @@ package nl.YoungCapital.Laika.service;
 
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,13 @@ public class AccountService {
 	public void deleteById(Long id) {
 		accountrepository.deleteById(id);
 	}
-
-
+	
+@PostConstruct
+void initAccountDatabase() {
+	
+	accountrepository.save(new Account("Laika", "Isweg", "L", "password", "email", "Moonstreet", "1", "1111LA", "Moontown"));
+	accountrepository.save(new Account("Bert", "Isonderweg", "B", "password", "email", "Rocketstreet", "22", "2222LA", "Rocketcity"));
+	
+}
 
 }
