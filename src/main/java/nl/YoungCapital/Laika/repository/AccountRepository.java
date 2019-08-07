@@ -17,14 +17,6 @@ public interface AccountRepository extends CrudRepository<Account, Long>{
 	Optional<Account> findByEmail(String email);
 
 	@Query
-<<<<<<< HEAD
-	Iterable<Account> findByUsernameAndPassword(String username, String password);
-=======
 	Optional<Account> findByUsernameAndPassword(String username, String password);
-
-	
-	
-	 
->>>>>>> master
 	
 }
