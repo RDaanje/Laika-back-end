@@ -1,9 +1,11 @@
 package nl.YoungCapital.Laika.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Wallet {
@@ -13,13 +15,13 @@ public class Wallet {
 	private long id;
 	
 	private double euro;
-	private int coins;
+	private double coins;
+		
 	
 	//no-args Constructor
 	public Wallet()	{
 		
 	}
-	
 	
 	public long getId() {
 		return id;
@@ -31,9 +33,9 @@ public class Wallet {
 		return euro;
 	}
 	public void setEuro(double euro) {
-		this.euro = euro;
+		this.euro += euro;
 	}
-	public int getCoins() {
+	public double getCoins() {
 		return coins;
 	}
 	public void setCoins(int coins) {

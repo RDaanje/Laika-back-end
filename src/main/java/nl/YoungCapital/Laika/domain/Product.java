@@ -9,10 +9,11 @@ import javax.persistence.Id;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id; 
+	private long id; 	
 	private String name;
 	private String supplier;
 	private long stock;
+	private double price;
 	
 	public long getId() {
 		return id;
@@ -39,6 +40,11 @@ public class Product {
 		this.stock = stock;
 	}
 	
-	
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
 	
 }
