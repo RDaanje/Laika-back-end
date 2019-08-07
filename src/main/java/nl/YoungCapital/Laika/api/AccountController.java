@@ -1,5 +1,6 @@
 package nl.YoungCapital.Laika.api;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,11 +136,25 @@ public class AccountController {
 		Account accountOk = accountcheck.get();
 		System.out.println(accountOk.getCart());
 		System.out.println(accountOk.getCart().getId());
-//		accountOk.getCart().setProductInCart(product);
+		accountOk.getCart().setProductInCart(product.getId());
 		
-			return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);
-			
+			return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);	
 		}
 	
+//	@GetMapping(path= "{id}/cart")
+//	public Iterable<ArrayList<Long>> returnCart(@PathVariable Long id) {
+//		System.out.println("in id /cart");
+//		Iterable<Account> accountcheck = accountService.findById(id);
+//		Account accountOk = accountcheck.get();
+//		return accountOk.getCart().getProductsFromCart();
+//	}
+	
+//	@GetMapping(path = "get")
+//	public ArrayList<Long> findAll2() {
+//
+//		return accountService.findById(1l).get().getCart().getProductsFromCart();
+//	}
+//
+//	
 	}
 	

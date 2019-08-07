@@ -14,7 +14,7 @@ public class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private ArrayList<Product> productsInCart = new ArrayList<>();
+	private ArrayList<Long> productsInCart = new ArrayList<>();
 
 	// no-args Constructor
 	public Cart() {
@@ -29,11 +29,17 @@ public class Cart {
 		this.id = id;
 	}
 
-	public ArrayList<Product> getProductsFromCart() {
+	public ArrayList<Long> getProductsFromCart() {
 		return productsInCart;
 	}
+	
+//	public Long getLongsFromCart() {
+//		for(Long product: productsInCart) {
+//			return product;
+//		}
+//	}
 
-	public void setProductInCart(Product productInCart) {
+	public void setProductInCart(Long productInCart) {
 		productsInCart.add(productInCart);
 	}
 	
