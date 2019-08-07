@@ -28,7 +28,7 @@ public class Account {
 	private String zipcode;
 	private String city;
 	
-	@OneToOne(cascade = {CascadeType.ALL})				//navragen!
+	@OneToOne(cascade = {CascadeType.ALL})				
 	private Wallet wallet;
 	
 //	@ManyToOne
