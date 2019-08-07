@@ -31,6 +31,9 @@ public class Account {
 	@OneToOne(cascade = {CascadeType.ALL})				
 	private Wallet wallet;
 	
+	@OneToOne(cascade = {CascadeType.ALL})				//navragen!
+	private Cart cart;
+	
 //	@ManyToOne
 //	private Adress adress;
 	
@@ -143,6 +146,14 @@ public class Account {
 	}
 
 
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+	
 	public Wallet getWallet() {
 		return wallet;
 	}
@@ -150,6 +161,5 @@ public class Account {
 	public void setWallet(Wallet wallet) {
 		this.wallet = wallet;
 	}
-	
 		
 }
