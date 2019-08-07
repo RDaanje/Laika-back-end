@@ -37,6 +37,28 @@ public class Account {
 //	@ManyToOne
 //	private Adress adress;
 	
+	public Account(String firstname, 
+			String lastname, 
+			String username, 
+			String password, 
+			String email, 
+			String street, 
+			String houseNumber, 
+			String zipcode, 
+			String city) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.street = street;
+		this.houseNumber = houseNumber;
+		this.zipcode = zipcode;
+		this.city = city;
+		
+	}
+	
+	
 	public String getStreet() {
 		return street;
 	}
