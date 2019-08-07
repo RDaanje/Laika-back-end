@@ -86,9 +86,10 @@ public class AccountController {
 		} else if (accountCheck2.isPresent()){ 
 			return new ResponseEntity<Account>(HttpStatus.FOUND);
 		} else {
-			Wallet walletNew = new Wallet();	
-			input.setWallet(walletNew);
+			Wallet walletNew = new Wallet();
 			Cart cartNew = new Cart();
+			
+			input.setWallet(walletNew);
 			input.setCart(cartNew);
 			
 			return new ResponseEntity<Account>(accountService.save(input), HttpStatus.OK);
@@ -125,17 +126,16 @@ public class AccountController {
 		
 		return accountService.save(account);
 	} 
-//	public ResponseEntity<Account> addProductToCart(@PathVariable("id") long id, @RequestBody Product product)
+
 	
 	@PutMapping(path = "{id}/cart")
 	public ResponseEntity<Account> addProductToCart(@PathVariable long id, @RequestBody Product product)	{
-		System.out.println(product.getName());
 		Optional<Account> accountcheck = accountService.findById(id);
 		
 		Account accountOk = accountcheck.get();
-		System.out.println(accountOk.getCart());
-		System.out.println(accountOk.getCart().getId());
-//		accountOk.getCart().setProductInCart(product);
+
+		accountOk.getCart().setProduct(product);
+
 		
 			return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);
 			

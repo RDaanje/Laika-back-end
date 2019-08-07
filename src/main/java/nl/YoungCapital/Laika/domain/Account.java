@@ -31,7 +31,7 @@ public class Account {
 	@OneToOne(cascade = {CascadeType.ALL})				
 	private Wallet wallet;
 	
-	@OneToOne(cascade = {CascadeType.ALL})				//navragen!
+	@OneToOne(cascade = {CascadeType.ALL})				
 	private Cart cart;
 	
 //	@ManyToOne
