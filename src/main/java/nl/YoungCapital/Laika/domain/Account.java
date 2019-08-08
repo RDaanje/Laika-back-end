@@ -52,9 +52,7 @@ public class Account {
 		this.houseNumber = houseNumber;
 		this.zipcode = zipcode;
 		this.city = city;
-		
 	}
-	
 	
 	public String getStreet() {
 		return street;
