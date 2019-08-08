@@ -28,10 +28,14 @@ public class Account {
 	private String zipcode;
 	private String city;
 	
-	@OneToOne(cascade = {CascadeType.ALL})				//navragen!
+	private boolean isAdmin;
+	
+	
+
+	@OneToOne(cascade = {CascadeType.ALL})				
 	private Wallet wallet;
 	
-	@OneToOne(cascade = {CascadeType.ALL})				//navragen!
+	@OneToOne(cascade = {CascadeType.ALL})				
 	private Cart cart;
 	
 //	@ManyToOne
@@ -45,7 +49,8 @@ public class Account {
 			String street, 
 			String houseNumber, 
 			String zipcode, 
-			String city) {
+			String city,
+			boolean admin) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
@@ -55,7 +60,9 @@ public class Account {
 		this.houseNumber = houseNumber;
 		this.zipcode = zipcode;
 		this.city = city;
-		
+		this.wallet = new Wallet();
+		this.cart = new Cart();
+		this.isAdmin = admin;
 	}
 	
 	
@@ -160,6 +167,15 @@ public class Account {
 
 	public void setWallet(Wallet wallet) {
 		this.wallet = wallet;
+	}
+	
+	public boolean getisAdmin() {
+		return isAdmin;
+	}
+
+
+	public void setisAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 		
 }
