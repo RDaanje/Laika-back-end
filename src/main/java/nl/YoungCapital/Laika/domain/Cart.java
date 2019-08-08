@@ -3,7 +3,7 @@ package nl.YoungCapital.Laika.domain;
 
 import java.util.ArrayList;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,12 +16,10 @@ public class Cart	{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-//	private ArrayList<Long> productsInCart = new ArrayList<>();
-	
-	private ArrayList<Product> products = new ArrayList<>();
 
-	
+	@Column(length = 10000)		
+	private ArrayList<Long> productsInCart = new ArrayList<>();
+
 
 	// no-args Constructor
 	public Cart() {
@@ -36,20 +34,23 @@ public class Cart	{
 		this.id = id;
 	}
 
-//	public ArrayList<Long> getProductsFromCart() {
-//		return productsInCart;
-//	}
 
-//	public void setProductInCart(Long productInCart) {
-//		productsInCart.add(productInCart);
-//	}
-	
-	public ArrayList<Product> getProduct() {
-		return products;
+
+	public ArrayList<Long> getProductsFromCart() {
+		return productsInCart;
+
 	}
+	
+//	public Long getLongsFromCart() {
+//		for(Long product: productsInCart) {
+//			return product;
+//		}
+//	}
 
-	public void setProduct(Product productInCart) {
-		products.add(productInCart);
+
+	public void setProductInCart(Long productInCart) {
+		productsInCart.add(productInCart);
+
 	}
 	
 }

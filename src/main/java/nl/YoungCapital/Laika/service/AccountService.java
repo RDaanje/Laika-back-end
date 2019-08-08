@@ -55,9 +55,9 @@ public class AccountService {
 	
 @PostConstruct
 void initAccountDatabase() {
-	accountrepository.save(new Account("", "", "A", "A", "", "", "", "", ""));
-	accountrepository.save(new Account("Laika", "Isweg", "L", "password", "email", "Moonstreet", "1", "1111LA", "Moontown"));
-	accountrepository.save(new Account("Bert", "Isonderweg", "B", "password", "email", "Rocketstreet", "22", "2222LA", "Rocketcity"));
+	accountrepository.save(new Account("", "", "admin", "admin", "admin", "", "", "", "",true));
+	accountrepository.save(new Account("Laika", "Isweg", "L", "password", "email", "Moonstreet", "1", "1111LA", "Moontown",false));
+	accountrepository.save(new Account("Bert", "Isonderweg", "B", "password", "email", "Rocketstreet", "22", "2222LA", "Rocketcity", false));
 	
 }
 

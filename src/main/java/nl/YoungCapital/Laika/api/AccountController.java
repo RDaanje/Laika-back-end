@@ -1,5 +1,6 @@
 package nl.YoungCapital.Laika.api;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,7 @@ public class AccountController {
 	
 	@GetMapping(path = "/forgot/{email}")
 	public ResponseEntity<Account> findByEmail(@PathVariable String email)	{
+		System.out.println(email);
 		Optional<Account> accountCheck = accountService.findByEmail(email);
 		if (!accountCheck.isPresent()) {
 			return new ResponseEntity<Account>(HttpStatus.NOT_FOUND);
@@ -134,12 +136,28 @@ public class AccountController {
 		
 		Account accountOk = accountcheck.get();
 
-		accountOk.getCart().setProduct(product);
+		System.out.println(accountOk.getCart());
+		System.out.println(accountOk.getCart().getId());
+		accountOk.getCart().setProductInCart(product.getId());
 
 		
-			return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);
-			
+			return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);	
 		}
 	
+//	@GetMapping(path= "{id}/cart")
+//	public Iterable<ArrayList<Long>> returnCart(@PathVariable Long id) {
+//		System.out.println("in id /cart");
+//		Iterable<Account> accountcheck = accountService.findById(id);
+//		Account accountOk = accountcheck.get();
+//		return accountOk.getCart().getProductsFromCart();
+//	}
+	
+//	@GetMapping(path = "get")
+//	public ArrayList<Long> findAll2() {
+//
+//		return accountService.findById(1l).get().getCart().getProductsFromCart();
+//	}
+//
+//	
 	}
 	
