@@ -34,6 +34,9 @@ public class ProductService {
 public Product save(Product product) {
 	return productRepository.save(product);
 }
+public void deleteById(Long id) {
+	productRepository.deleteById(id);
+}
 
 @PostConstruct
 void initProductDatabase() {

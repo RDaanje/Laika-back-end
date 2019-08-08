@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,6 +50,16 @@ public class ProductController {
 			return new ResponseEntity<Product>(productService.save(input), HttpStatus.OK);
 		}
 					
+	}
+	
+	@DeleteMapping(path = "delete/{id}")
+	public ResponseEntity<Product> deleteById(@PathVariable("id") long id) {
+		if (!productService.findById(id).isPresent()) {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			productService.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
 	}
 }
 

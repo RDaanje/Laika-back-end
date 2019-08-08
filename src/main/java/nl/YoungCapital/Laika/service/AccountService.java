@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import nl.YoungCapital.Laika.domain.Account;
+import nl.YoungCapital.Laika.domain.Cart;
+import nl.YoungCapital.Laika.domain.Wallet;
 import nl.YoungCapital.Laika.repository.AccountRepository;
 
 @Service
@@ -56,8 +58,16 @@ public class AccountService {
 @PostConstruct
 void initAccountDatabase() {
 	
-	accountrepository.save(new Account("Laika", "Isweg", "L", "password", "email", "Moonstreet", "1", "1111LA", "Moontown"));
-	accountrepository.save(new Account("Bert", "Isonderweg", "B", "password", "email", "Rocketstreet", "22", "2222LA", "Rocketcity"));
+	Account account1 = accountrepository.save(new Account("Laika", "Isweg", "L", "password", "email1", "Moonstreet", "1", "1111LA", "Moontown"));
+	Account account2 = accountrepository.save(new Account("Bert", "Isonderweg", "B", "password", "email2", "Rocketstreet", "22", "2222LA", "Rocketcity"));
+	
+	account1.setWallet(new Wallet(1000, 1001));
+	account1.setCart(new Cart());
+	accountrepository.save(account1);
+	
+	account2.setWallet(new Wallet(2000, 2002));
+	account2.setCart(new Cart());
+	accountrepository.save(account2);
 	
 }
 
