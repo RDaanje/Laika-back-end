@@ -18,9 +18,5 @@ public interface AccountRepository extends CrudRepository<Account, Long>{
 
 	@Query
 	Optional<Account> findByUsernameAndPassword(String username, String password);
-
-	
-	
-	 
 	
 }

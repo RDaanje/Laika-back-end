@@ -1,5 +1,6 @@
 package nl.YoungCapital.Laika.api;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import nl.YoungCapital.Laika.domain.Account;
+import nl.YoungCapital.Laika.domain.Cart;
+import nl.YoungCapital.Laika.domain.Product;
 import nl.YoungCapital.Laika.domain.Wallet;
 import nl.YoungCapital.Laika.service.AccountService;
 
@@ -51,7 +54,7 @@ public class AccountController {
 	
 	@GetMapping(path = "get")
 	public Iterable<Account> findAll() {
-
+ 
 		return accountService.findAll();
 	}
 
@@ -72,17 +75,6 @@ public class AccountController {
 			return new ResponseEntity<Account>(accountOk, HttpStatus.OK);
 		}
 	}
-	
-	@PutMapping(path= "{id}/update")
-	public Account accountUpdate(@PathVariable long id, @RequestBody Account account) {
-		Optional<Account> accountCheck = accountService.findById(account.getId());
-		
-		accountCheck.get().setFirstname(account.getFirstname());
-		accountCheck.get().setLastname(account.getLastname());
-		
-		
-		return accountService.save(account);
-	} 
 
 	@PostMapping(path = "create")
 	public ResponseEntity<Account> create(@RequestBody Account input) {
@@ -97,12 +89,21 @@ public class AccountController {
 		} else {
 			Wallet walletNew = new Wallet();	
 			input.setWallet(walletNew);
+			Cart cartNew = new Cart();
+			input.setCart(cartNew);
 			
 			return new ResponseEntity<Account>(accountService.save(input), HttpStatus.OK);
 		}
 					
 	}
 	
+
+	@PutMapping(path = "{id}/{email}")
+	public Optional<Account> changeEmail(@PathVariable("id") long id, @PathVariable("email") String email){
+		accountService.findById(id).get().setEmail(email);
+		return accountService.findById(id);
+	}
+
 	@PutMapping(path = "{id}/wallet/{money}")
 	public ResponseEntity<Account> addMoney(@PathVariable("id") long id, @PathVariable("money") double money)	{
 		
@@ -113,9 +114,47 @@ public class AccountController {
 		
 			return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);
 			
-	
 		}
+	
+	@PutMapping(path= "{id}/update")
+	public Account accountUpdate(@PathVariable long id, @RequestBody Account account) {
+		Optional<Account> accountCheck = accountService.findById(account.getId());
+		
+		accountCheck.get().setFirstname(account.getFirstname());
+		accountCheck.get().setLastname(account.getLastname());
+		
+		
+		return accountService.save(account);
+	} 
+//	public ResponseEntity<Account> addProductToCart(@PathVariable("id") long id, @RequestBody Product product)
+	
+	@PutMapping(path = "{id}/cart")
+	public ResponseEntity<Account> addProductToCart(@PathVariable long id, @RequestBody Product product)	{
+		System.out.println(product.getName());
+		Optional<Account> accountcheck = accountService.findById(id);
+		
+		Account accountOk = accountcheck.get();
+		System.out.println(accountOk.getCart());
+		System.out.println(accountOk.getCart().getId());
+		accountOk.getCart().setProductInCart(product.getId());
+		
+			return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);	
+		}
+	
+//	@GetMapping(path= "{id}/cart")
+//	public Iterable<ArrayList<Long>> returnCart(@PathVariable Long id) {
+//		System.out.println("in id /cart");
+//		Iterable<Account> accountcheck = accountService.findById(id);
+//		Account accountOk = accountcheck.get();
+//		return accountOk.getCart().getProductsFromCart();
+//	}
+	
+//	@GetMapping(path = "get")
+//	public ArrayList<Long> findAll2() {
+//
+//		return accountService.findById(1l).get().getCart().getProductsFromCart();
+//	}
+//
+//	
 	}
 	
-	
-
