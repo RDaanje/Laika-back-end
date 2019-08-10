@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import nl.YoungCapital.Laika.domain.Account;
 import nl.YoungCapital.Laika.domain.Cart;
+import nl.YoungCapital.Laika.domain.Orderhistory;
 import nl.YoungCapital.Laika.domain.Product;
 import nl.YoungCapital.Laika.domain.Wallet;
 import nl.YoungCapital.Laika.service.AccountService;
@@ -91,6 +92,8 @@ public class AccountController {
 			input.setWallet(walletNew);
 			Cart cartNew = new Cart();
 			input.setCart(cartNew);
+			Orderhistory orderhistoryNew = new Orderhistory();
+			input.setOrderhistory(orderhistoryNew);
 			
 			return new ResponseEntity<Account>(accountService.save(input), HttpStatus.OK);
 		}

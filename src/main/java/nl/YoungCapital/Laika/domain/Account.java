@@ -2,6 +2,7 @@ package nl.YoungCapital.Laika.domain;
 
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Account {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@Column(length = 4000000)
 	private long id;
 	
 	private String firstname;
@@ -35,6 +37,9 @@ public class Account {
 	
 	@OneToOne(cascade = {CascadeType.ALL})				//navragen!
 	private Cart cart;
+	
+	@OneToOne(cascade = {CascadeType.PERSIST})				
+	private Orderhistory orderhistory;
 	
 //	@ManyToOne
 //	private Adress adress;
@@ -161,5 +166,14 @@ public class Account {
 	public void setWallet(Wallet wallet) {
 		this.wallet = wallet;
 	}
+	
+	public Orderhistory getOrderhistory() {
+		return orderhistory;
+	}
+
+	public void setOrderhistory(Orderhistory orderhistory) {
+		this.orderhistory = orderhistory;
+	}
+
 		
 }
