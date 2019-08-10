@@ -1,6 +1,8 @@
 package nl.YoungCapital.Laika.domain;
 
+
 import java.util.ArrayList;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,11 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
 @Entity
-public class Cart {
+public class Cart	{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
@@ -23,7 +27,7 @@ public class Cart {
 
 	@ManyToOne(cascade = {CascadeType.PERSIST})
 	private Orderhistory orderhistory;
-	
+
 	// no-args Constructor
 	public Cart() {
 
@@ -44,8 +48,11 @@ public class Cart {
 		this.id = id;
 	}
 
+
+
 	public ArrayList<Long> getProductsFromCart() {
 		return productsInCart;
+
 	}
 	
 //	public Long getLongsFromCart() {
@@ -54,9 +61,11 @@ public class Cart {
 //		}
 //	}
 
+
 	public void setProductInCart(Long productInCart) {
 
 		productsInCart.add(productInCart);
+
 	}
 	
 	

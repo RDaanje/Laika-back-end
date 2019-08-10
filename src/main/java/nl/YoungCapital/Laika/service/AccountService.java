@@ -63,10 +63,7 @@ public class AccountService {
 	
 @PostConstruct
 void initAccountDatabase() {
-	
-	Account account1 = accountrepository.save(new Account("Laika", "Isweg", "L", "password", "email1", "Moonstreet", "1", "1111LA", "Moontown"));
-	Account account2 = accountrepository.save(new Account("Bert", "Isonderweg", "B", "password", "email2", "Rocketstreet", "22", "2222LA", "Rocketcity"));
-	
+
 	account1.setWallet(new Wallet(1000, 1001));
 	account1.setCart(new Cart());
 	account1.setOrderhistory(new Orderhistory(LocalDateTime.now(), "Order1", false, 100.50));
@@ -80,6 +77,11 @@ void initAccountDatabase() {
 	orderhistory1.setAllOrders(cart1);
 	account2.setOrderhistory(orderhistory1);
 	accountrepository.save(account2);
+
+	accountrepository.save(new Account("", "", "admin", "admin", "admin", "", "", "", "",true));
+	Account account1 = accountrepository.save(new Account("Laika", "Isweg", "L", "password", "email", "Moonstreet", "1", "1111LA", "Moontown",false));
+	Account account2 = accountrepository.save(new Account("Bert", "Isonderweg", "B", "password", "email", "Rocketstreet", "22", "2222LA", "Rocketcity", false));
+
 	
 }
 
