@@ -2,19 +2,23 @@ package nl.YoungCapital.Laika.domain;
 
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 
 @Entity
 public class Account {
-
+	@SequenceGenerator(name="seq", initialValue=1000, allocationSize=1)
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@Column(length = 4000000)
 	private long id;
 	
 	private String firstname;
@@ -39,6 +43,9 @@ public class Account {
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Cart cart;
 	
+	@OneToOne(cascade = {CascadeType.PERSIST})				
+	private Orderhistory orderhistory;
+	
 //	@ManyToOne
 //	private Adress adress;
 	
@@ -61,11 +68,12 @@ public class Account {
 		this.houseNumber = houseNumber;
 		this.zipcode = zipcode;
 		this.city = city;
+
 		this.wallet = new Wallet();
 		this.cart = new Cart();
 		this.isAdmin = admin;
+
 	}
-	
 	
 	public String getStreet() {
 		return street;
@@ -170,6 +178,14 @@ public class Account {
 		this.wallet = wallet;
 	}
 	
+	public Orderhistory getOrderhistory() {
+		return orderhistory;
+	}
+
+	public void setOrderhistory(Orderhistory orderhistory) {
+		this.orderhistory = orderhistory;
+	}
+
 	public boolean getisAdmin() {
 		return isAdmin;
 	}
@@ -178,5 +194,6 @@ public class Account {
 	public void setisAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+
 		
 }

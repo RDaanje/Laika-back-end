@@ -19,23 +19,17 @@ import org.hibernate.Criteria;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Cart	{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
 	private long id;
 
-//	@Column(length = 10000)		
-//	private ArrayList<Long> productsInCart = new ArrayList<>();
-//	
-//	@Column(length = 500)
-//	private ArrayList<Long> productstoShow = new ArrayList<>();
-//	
-//	@Column(length = 500)
-//	private ArrayList<Integer> productstoShowAmmount = new ArrayList<>();
-	
 	private double total;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -48,6 +42,9 @@ public class Cart	{
 	
 	private int totalProducts;
 	
+	@ManyToOne(cascade = {CascadeType.PERSIST})
+	private Orderhistory orderhistory;
+
 
 	// no-args Constructor
 	public Cart() {
@@ -66,16 +63,6 @@ public class Cart	{
 	}
 
 
-
-
-//	public ArrayList<Integer> getProductstoShowAmmount() {
-//		return productstoShowAmmount;
-//	}
-//
-//	public void setProductstoShowAmmount(ArrayList<Integer> productstoShowAmmount) {
-//		this.productstoShowAmmount = productstoShowAmmount;
-//	}
-
 	public long getId() {
 		return id;
 	}
@@ -84,26 +71,6 @@ public class Cart	{
 		this.id = id;
 	}
 
-
-
-//	public ArrayList<Long> getProductsFromCart() {
-//		return productsInCart;
-//
-//	}
-//
-//
-//	public void setProductInCart(Long productInCart) {
-//		productsInCart.add(productInCart);
-//		if(!(productstoShow.contains(productInCart))) {
-//			productstoShow.add(productInCart);
-//			productstoShowAmmount.add(productstoShow.lastIndexOf(productInCart), 1);
-//		}else {
-//			productstoShowAmmount.set(productstoShow.indexOf(productInCart), (productstoShowAmmount.get(productstoShow.indexOf(productInCart))+1));
-//		}
-//
-//	}
-	
-	
 	
 	public Set<Product> getProductSet() {
 		return productSet;
@@ -117,31 +84,17 @@ public class Cart	{
 		this.productSet.remove(productSet);
 	}
 
-//	public void deleteProductFromCart(Long productInCart) {
-//		productsInCart.remove(productInCart);
-//		productstoShowAmmount.set(productstoShow.indexOf(productInCart), (productstoShowAmmount.get(productstoShow.indexOf(productInCart))-1));
-//		if(!(productsInCart.contains(productInCart))) {
-//			productstoShowAmmount.remove(productstoShowAmmount.get(productstoShow.indexOf(productInCart)));
-//			productstoShow.remove(productInCart);
-//	}
-//	}
-//
-//	public ArrayList<Long> getProductstoShow() {
-//		return productstoShow;
-//	}
-//
-//	public void setProductstoShow(ArrayList<Long> productstoShow) {
-//		this.productstoShow = productstoShow;
-//	}
 
 	public double getTotal() {
 		return total;
 	}
 
+
 	public void setTotal(double total) {
 		this.total = this.total+total;
 	}
 	
+
 	public void setTotal2() {
 		this.total = 0;
 		for(Product p: productSet) {
@@ -155,5 +108,6 @@ public class Cart	{
 //		this.total = this.total-total;
 //		}
 //	}
+
 	
 }

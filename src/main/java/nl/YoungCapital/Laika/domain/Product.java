@@ -1,6 +1,10 @@
 package nl.YoungCapital.Laika.domain;
 
+
 import javax.persistence.CascadeType;
+
+import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Product {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
+	@Column( )
 	private long id; 	
 	private String name;
 	private String supplier;

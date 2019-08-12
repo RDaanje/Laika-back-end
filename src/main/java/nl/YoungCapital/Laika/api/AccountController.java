@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import nl.YoungCapital.Laika.domain.Account;
 import nl.YoungCapital.Laika.domain.Cart;
+import nl.YoungCapital.Laika.domain.Orderhistory;
 import nl.YoungCapital.Laika.domain.Product;
 import nl.YoungCapital.Laika.domain.Wallet;
 import nl.YoungCapital.Laika.service.AccountService;
@@ -98,6 +99,10 @@ public class AccountController {
 			input.setWallet(walletNew);
 			input.setCart(cartNew);
 
+			Orderhistory orderhistoryNew = new Orderhistory();
+			input.setOrderhistory(orderhistoryNew);
+			
+
 			return new ResponseEntity<Account>(accountService.save(input), HttpStatus.OK);
 		}
 
@@ -125,9 +130,11 @@ public class AccountController {
 	public Account accountUpdate(@PathVariable long id, @RequestBody Account account) {
 		Optional<Account> accountCheck = accountService.findById(account.getId());
 
-		accountCheck.get().setFirstname(account.getFirstname());
-		accountCheck.get().setLastname(account.getLastname());
-
+		
+		accountCheck.get().setFirstname(account.getFirstname());	//overbodig met ngmodel
+		accountCheck.get().setLastname(account.getLastname());		//overbodig met ngmodel
+		
+		
 		return accountService.save(account);
 	}
 
@@ -179,25 +186,18 @@ public class AccountController {
 			}
 		}
 
-//		accountOk.getCart().deleteProductFromCart(id2);
-//		accountOk.getCart().minTotal(productOk.getPrice());
-
 		return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);
 	}
 
-//	@GetMapping(path= "{id}/cart")
-//	public Iterable<ArrayList<Long>> returnCart(@PathVariable Long id) {
-//		System.out.println("in id /cart");
-//		Iterable<Account> accountcheck = accountService.findById(id);
-//		Account accountOk = accountcheck.get();
-//		return accountOk.getCart().getProductsFromCart();
-//	}
-
-//	@GetMapping(path = "get")
-//	public ArrayList<Long> findAll2() {
-//
-//		return accountService.findById(1l).get().getCart().getProductsFromCart();
-//	}
-//
-//	
+	
+	@DeleteMapping(path = "{id}/delete")
+	public ResponseEntity<Account> deleteAccount(@PathVariable long id)	{
+		if (!accountService.findById(id).isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+		} else {
+			accountService.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+	} 
+	
 }
