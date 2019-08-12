@@ -15,21 +15,22 @@ import nl.YoungCapital.Laika.repository.ProductRepository;
 @Service
 @Transactional
 public class ProductService {
-	
+
 	@Autowired
 	ProductRepository productRepository;
-	
+
 	public Iterable<Product> findAll() {
 		return productRepository.findAll();
 	}
 
-	public Optional<Product> findById(long id)	{
+	public Optional<Product> findById(long id) {
 		return productRepository.findById(id);
 	}
-	
-	public Optional<Product> findByName(String name)	{
+
+	public Optional<Product> findByName(String name) {
 		return productRepository.findByName(name);
 	}
+
 
 public Product save(Product product) {
 	return productRepository.save(product);
@@ -48,5 +49,5 @@ void initProductDatabase() {
 	productRepository.save(new Product("Sun", "LaikaProduction", 14, 99999.99, "assets/images/Sun.jpg"));
 
 
-}
+	}
 }

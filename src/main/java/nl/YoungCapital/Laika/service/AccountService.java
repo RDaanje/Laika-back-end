@@ -56,7 +56,7 @@ public class AccountService {
 		return accountrepository.findByUsernameAndPassword(username, password);
 	}
 
-	// Deletes an account (optionele functie)
+	// Deletes an account 
 	public void deleteById(Long id) {
 		accountrepository.deleteById(id);
 	}
