@@ -28,4 +28,8 @@ public class OrderhistoryService {
 		return orderhistoryRepository.findById(id);
 	}
 
+public Orderhistory save(Orderhistory orderhistory) {
+	return orderhistoryRepository.save(orderhistory);
+}
+
 }

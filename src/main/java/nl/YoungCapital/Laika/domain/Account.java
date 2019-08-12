@@ -43,7 +43,7 @@ public class Account {
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Cart cart;
 	
-	@OneToOne(cascade = {CascadeType.PERSIST})				
+	@OneToOne(cascade = {CascadeType.ALL})				
 	private Orderhistory orderhistory;
 	
 //	@ManyToOne
@@ -69,9 +69,25 @@ public class Account {
 		this.zipcode = zipcode;
 		this.city = city;
 
+		this.isAdmin = admin;
+
+	}
+	public Account(String firstname, 
+			String lastname, 
+			String username, 
+			String password, 
+			String email, 
+			String street, 
+			String houseNumber, 
+			String zipcode, 
+			String city,
+			Wallet wallet,
+			Cart cart,
+			boolean admin) {
+		this(firstname, lastname, username, password, email, street, houseNumber, zipcode, city, admin);
+
 		this.wallet = new Wallet();
 		this.cart = new Cart();
-		this.isAdmin = admin;
 
 	}
 	

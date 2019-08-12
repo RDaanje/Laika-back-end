@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,41 +13,50 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Orderhistory {
-
+@SequenceGenerator(name="seq", initialValue=1000, allocationSize=1)
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	@Column(length = 4000000)
 	private long id;
-	
-	@Column(length = 429496729)
-	private ArrayList<Cart> allOrders = new ArrayList<>();
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn
+	@JsonIgnore
+	private Account account;
+	
+	
 	private String productName;
 	private boolean paid;
-	private double totalCosts;
+	private double totalPerCart;
 	private LocalDateTime time;
+	
 	
 	public Orderhistory() {
 	}
 	public Orderhistory(LocalDateTime time) {
 		this.time = time;
 	}
-	public Orderhistory( String productName, boolean paid, double totalCosts) {
+	public Orderhistory( String productName, boolean paid, double totalPerCart) {
 		this.productName = productName;
 		this.paid = paid;
-		this.totalCosts = totalCosts;
+		this.totalPerCart = totalPerCart;
 	}
 	
-	public Orderhistory( LocalDateTime time, String productName, boolean paid, double totalCosts) {
+	public Orderhistory( LocalDateTime time, String productName, boolean paid, double totalPerCart) {
 		this.time = time;
 		this.productName = productName;
 		this.paid = paid;
-		this.totalCosts = totalCosts;
+		this.totalPerCart = totalPerCart;
 	}
 
 	public long getId() {
@@ -55,6 +66,7 @@ public class Orderhistory {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
 
 	public String getProductName() {
 		return productName;
@@ -72,21 +84,14 @@ public class Orderhistory {
 		this.paid = paid;
 	}
 
-	public double getTotalCosts() {
-		return totalCosts;
+	public double getTotalPerCart() {
+		return totalPerCart;
 	}
 
-	public void setTotalCosts(double totalCosts) {
-		this.totalCosts = totalCosts;
+	public void setTotalPerCart(double totalPerCart) {
+		this.totalPerCart = totalPerCart;
 	}
 
-	public ArrayList<Cart> getAllOrders() {
-		return allOrders;
-	}
-
-	public void setAllOrders(Cart cart) {
-		allOrders.add(cart);
-	}
 	public LocalDateTime getTime() {
 		return time;
 	}

@@ -2,6 +2,7 @@ package nl.YoungCapital.Laika.domain;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 import org.hibernate.Criteria;
 
@@ -25,9 +27,11 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Cart	{
-
+@SequenceGenerator(name="seq", initialValue=1000, allocationSize=1)
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@Column(length = 4000000)
 	private long id;
 
 	private double total;
@@ -38,13 +42,14 @@ public class Cart	{
 	private Account account;
 	
 	@OneToMany
-	public Set<Product> productSet;
+	public Set<Product> productSet = new HashSet<Product>();
 	
 	private int totalProducts;
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@JoinColumn
+	@JsonIgnore
 	private Orderhistory orderhistory;
-
 
 	// no-args Constructor
 	public Cart() {

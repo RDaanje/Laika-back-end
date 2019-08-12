@@ -12,15 +12,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Product {
+@SequenceGenerator(name="seq", initialValue=1000, allocationSize=1)
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
-	@Column( )
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@Column(length = 4000000)
 	private long id; 	
 	private String name;
 	private String supplier;
@@ -33,6 +35,11 @@ public class Product {
 	@JoinColumn
 	@JsonIgnore
 	private Cart cart;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn
+	@JsonIgnore
+	private Orderhistory orderhistory;
 	
 	public Product() {}
 	

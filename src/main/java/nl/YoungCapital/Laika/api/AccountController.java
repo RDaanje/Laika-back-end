@@ -23,6 +23,7 @@ import nl.YoungCapital.Laika.domain.Orderhistory;
 import nl.YoungCapital.Laika.domain.Product;
 import nl.YoungCapital.Laika.domain.Wallet;
 import nl.YoungCapital.Laika.service.AccountService;
+import nl.YoungCapital.Laika.service.OrderhistoryService;
 import nl.YoungCapital.Laika.service.ProductService;
 
 @CrossOrigin(origins = "*")
@@ -95,14 +96,12 @@ public class AccountController {
 		} else {
 			Wallet walletNew = new Wallet();
 			Cart cartNew = new Cart();
-
+			Orderhistory orderhistoryNew = new Orderhistory();
+			
 			input.setWallet(walletNew);
 			input.setCart(cartNew);
-
-			Orderhistory orderhistoryNew = new Orderhistory();
 			input.setOrderhistory(orderhistoryNew);
 			
-
 			return new ResponseEntity<Account>(accountService.save(input), HttpStatus.OK);
 		}
 
@@ -162,7 +161,7 @@ public class AccountController {
 
 		return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);
 	}
-
+	
 	@DeleteMapping(path = "{id}/cart/{id2}")
 	public ResponseEntity<Account> removeProductFromCart(@PathVariable long id, @PathVariable long id2) {
 		Optional<Account> accountcheck = accountService.findById(id);
