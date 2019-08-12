@@ -17,7 +17,7 @@ public class Account {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
-	@Column(length = 4000000)
+	@Column(length = 429496729)
 	private long id;
 	
 	private String firstname;

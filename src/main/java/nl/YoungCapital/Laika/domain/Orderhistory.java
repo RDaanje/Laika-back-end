@@ -13,13 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Orderhistory {
 
+	@SequenceGenerator(name="seq", initialValue=1000, allocationSize=1)
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
-	@Column(length = 4000000)
 	private long id;
 	
 	@Column(length = 429496729)

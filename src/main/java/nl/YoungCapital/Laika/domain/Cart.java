@@ -13,11 +13,14 @@ import javax.persistence.Id;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 
 @Entity
 public class Cart	{
 
+	@SequenceGenerator(name="seq", initialValue=1000, allocationSize=1)
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
 	private long id;
