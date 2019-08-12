@@ -31,13 +31,13 @@ public class ProductService {
 		return productRepository.findByName(name);
 	}
 
-
 public Product save(Product product) {
 	return productRepository.save(product);
 }
 public void deleteById(Long id) {
 	productRepository.deleteById(id);
 }
+
 
 @PostConstruct
 void initProductDatabase() {

@@ -1,10 +1,19 @@
 package nl.YoungCapital.Laika.domain;
 
+
+import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Product {
@@ -18,6 +27,12 @@ public class Product {
 	private long stock;
 	private double price;
 	private String image;
+	private int quantity =1;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn
+	@JsonIgnore
+	private Cart cart;
 	
 	public Product() {}
 	
@@ -27,6 +42,12 @@ public class Product {
 		this.stock = stock;
 		this.price = price;
 		this.image = image;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Product p = (Product) obj;
+		return p.getId() == this.getId();
 	}
 	
 	public long getId() {
@@ -66,5 +87,15 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
+
 	
 }
