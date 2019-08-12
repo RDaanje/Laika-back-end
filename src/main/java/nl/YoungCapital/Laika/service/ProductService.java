@@ -41,12 +41,12 @@ public void deleteById(Long id) {
 
 @PostConstruct
 void initProductDatabase() {
-	productRepository.save(new Product("Bert", "LaikaProduction", 10, 1.99, "assets/images/Bert.jpg"));
-	productRepository.save(new Product("Laika", "LaikaProduction", 101, 10.99, "assets/images/LaikaLogoDog.png"));
-	productRepository.save(new Product("Mars", "LaikaProduction", 11, 299.99, "assets/images/Mars.jpg"));
-	productRepository.save(new Product("Moon", "LaikaProduction", 12, 399.99, "assets/images/Moon.jpg"));
-	productRepository.save(new Product("Saturn", "LaikaProduction", 13, 499.99, "assets/images/Saturn.jpg"));
-	productRepository.save(new Product("Sun", "LaikaProduction", 14, 99999.99, "assets/images/Sun.jpg"));
+	productRepository.save(new Product(500l,"Bert", "LaikaProduction", 10, 1.99, "assets/images/Bert.jpg"));
+	productRepository.save(new Product(501l,"Laika", "LaikaProduction", 101, 10.99, "assets/images/LaikaLogoDog.png"));
+	productRepository.save(new Product(502l,"Mars", "LaikaProduction", 11, 299.99, "assets/images/Mars.jpg"));
+	productRepository.save(new Product(503l,"Moon", "LaikaProduction", 12, 399.99, "assets/images/Moon.jpg"));
+	productRepository.save(new Product(504l,"Saturn", "LaikaProduction", 13, 499.99, "assets/images/Saturn.jpg"));
+	productRepository.save(new Product(505l,"Sun", "LaikaProduction", 14, 99999.99, "assets/images/Sun.jpg"));
 
 
 	}

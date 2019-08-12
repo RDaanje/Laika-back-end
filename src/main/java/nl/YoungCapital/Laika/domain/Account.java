@@ -49,6 +49,10 @@ public class Account {
 //	@ManyToOne
 //	private Adress adress;
 	
+	//no-args Constructor
+	public Account() {			
+	}
+	
 	public Account(String firstname, 
 			String lastname, 
 			String username, 
@@ -107,10 +111,7 @@ public class Account {
 		this.city = city;
 	}
 
-	//no-args Constructor
-	public Account() {
-		
-	}
+	
 	
 	/*Getters en setters voor de fields*/
 	public long getId() {

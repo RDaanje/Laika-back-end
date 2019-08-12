@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
 public class Product {
@@ -27,16 +30,17 @@ public class Product {
 	private long stock;
 	private double price;
 	private String image;
-	private int quantity =1;
+	private int quantity;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn
-	@JsonIgnore
-	private Cart cart;
-	
+//	@ManyToOne
+//	private Cart cart;
+
+
 	public Product() {}
 	
-	public Product (String name, String supplier, long stock, double price, String image) {
+	public Product (Long id,
+			String name, String supplier, long stock, double price, String image) {
+		this.id = id;
 		this.name = name;
 		this.supplier = supplier;
 		this.stock = stock;
@@ -96,6 +100,12 @@ public class Product {
 		this.quantity = quantity;
 	}
 	
-
+//	public Cart getCart() {
+//		return cart;
+//	}
+//
+//	public void setCart(Cart cart) {
+//		this.cart = cart;
+//	}
 	
 }

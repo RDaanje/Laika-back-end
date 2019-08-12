@@ -2,6 +2,7 @@ package nl.YoungCapital.Laika.domain;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,11 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.Criteria;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -34,13 +39,13 @@ public class Cart	{
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn
-	@JsonIgnore
+	
 	private Account account;
 	
 	@OneToMany
-	public Set<Product> productSet;
+	public Set<Product> productSet = new HashSet<Product>();
 	
-	private int totalProducts;
+	private int totalProducts = 0;
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST})
 	private Orderhistory orderhistory;
@@ -71,15 +76,15 @@ public class Cart	{
 		this.id = id;
 	}
 
-	
+
 	public Set<Product> getProductSet() {
 		return productSet;
 	}
 
-	public void setProductSet(Product productSet) {
-		this.productSet.add(productSet);
+	public void setProductSet(Set<Product> productSet) {
+		this.productSet = productSet;
 	}
-	
+
 	public void removeProductSet(Product productSet) {
 		this.productSet.remove(productSet);
 	}
