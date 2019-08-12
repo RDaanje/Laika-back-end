@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -122,8 +123,8 @@ public class AccountController {
 	public Account accountUpdate(@PathVariable long id, @RequestBody Account account) {
 		Optional<Account> accountCheck = accountService.findById(account.getId());
 		
-		accountCheck.get().setFirstname(account.getFirstname());
-		accountCheck.get().setLastname(account.getLastname());
+		accountCheck.get().setFirstname(account.getFirstname());	//overbodig met ngmodel
+		accountCheck.get().setLastname(account.getLastname());		//overbodig met ngmodel
 		
 		
 		return accountService.save(account);
@@ -144,6 +145,17 @@ public class AccountController {
 			return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);	
 		}
 	
+	@DeleteMapping(path = "{id}/delete")
+	public ResponseEntity<Account> deleteAccount(@PathVariable long id)	{
+		if (!accountService.findById(id).isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+		} else {
+			accountService.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+	} 
+	
+
 //	@GetMapping(path= "{id}/cart")
 //	public Iterable<ArrayList<Long>> returnCart(@PathVariable Long id) {
 //		System.out.println("in id /cart");

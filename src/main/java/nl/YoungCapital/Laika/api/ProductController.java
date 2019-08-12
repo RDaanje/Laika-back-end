@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +40,12 @@ public class ProductController {
 		return productService.findById(id);
 	}
 	
+	@GetMapping(path = "get/name/{name}")
+	public Optional<Product> findByName(@PathVariable String name)	{
+		return productService.findByName(name);
+	}
+	
+	
 	@PostMapping(path = "create")
 	public ResponseEntity<Product> create(@RequestBody Product input) {
 
@@ -50,6 +58,23 @@ public class ProductController {
 		}
 					
 	}
-}
+	
+	@PutMapping(path= "{id}/update")
+	public Product productUpdate(@PathVariable long id, @RequestBody Product product) {
+		Optional<Product> accountCheck = productService.findById(product.getId());	//lijkt overbodig
+	
+		return productService.save(product);
+	} 
 
+	@DeleteMapping(path= "{id}/delete")
+	public ResponseEntity<Product> deleteProduct(@PathVariable long id)	{
+	
+		if (!productService.findById(id).isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+		} else {
+			productService.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+	}
+}
 	
