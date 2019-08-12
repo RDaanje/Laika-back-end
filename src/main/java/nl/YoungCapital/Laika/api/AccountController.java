@@ -1,7 +1,9 @@
 package nl.YoungCapital.Laika.api;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -95,13 +97,11 @@ public class AccountController {
 		} else {
 			Wallet walletNew = new Wallet();
 			Cart cartNew = new Cart();
-
+			Orderhistory newhistory = new Orderhistory();
+			
 			input.setWallet(walletNew);
 			input.setCart(cartNew);
-
-			Orderhistory orderhistoryNew = new Orderhistory();
-			input.setOrderhistory(orderhistoryNew);
-			
+			input.setOrderhistory(newhistory);
 
 			return new ResponseEntity<Account>(accountService.save(input), HttpStatus.OK);
 		}
@@ -129,12 +129,8 @@ public class AccountController {
 	@PutMapping(path = "{id}/update")
 	public Account accountUpdate(@PathVariable long id, @RequestBody Account account) {
 		Optional<Account> accountCheck = accountService.findById(account.getId());
-
-		
-		accountCheck.get().setFirstname(account.getFirstname());	//overbodig met ngmodel
-		accountCheck.get().setLastname(account.getLastname());		//overbodig met ngmodel
-		
-		
+		System.out.println(account);
+	
 		return accountService.save(account);
 	}
 
@@ -153,8 +149,11 @@ public class AccountController {
 			}
 
 		}
+		
 		if (!(foundProductInCart)) {
-			accountOk.getCart().setProductSet(product);
+			Set<Product> temp = new HashSet();
+			temp.add(product);
+			accountOk.getCart().setProductSet(temp);
 		}
 		
 		accountOk.getCart().setTotal2();

@@ -14,15 +14,18 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Orderhistory {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
-	@Column(length = 4000000)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	
 	@Column(length = 429496729)
+	@JsonFormat(shape=JsonFormat.Shape.ARRAY)
 	private ArrayList<Cart> allOrders = new ArrayList<>();
 
 	private String productName;
