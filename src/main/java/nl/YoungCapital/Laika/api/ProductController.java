@@ -59,12 +59,25 @@ public class ProductController {
 					
 	}
 	
+
 	@PutMapping(path= "{id}/update")
 	public Product productUpdate(@PathVariable long id, @RequestBody Product product) {
 		Optional<Product> accountCheck = productService.findById(product.getId());	//lijkt overbodig
 	
 		return productService.save(product);
 	} 
+  
+	@DeleteMapping(path = "delete/{id}")
+	public ResponseEntity<Product> deleteById(@PathVariable("id") long id) {
+		if (!productService.findById(id).isPresent()) {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			productService.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+	}
+}
+
 
 	@DeleteMapping(path= "{id}/delete")
 	public ResponseEntity<Product> deleteProduct(@PathVariable long id)	{

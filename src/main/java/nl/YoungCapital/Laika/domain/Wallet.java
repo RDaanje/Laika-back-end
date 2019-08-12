@@ -1,16 +1,19 @@
 package nl.YoungCapital.Laika.domain;
 
+import java.util.HashSet;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
+
 @Entity
 public class Wallet {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	private long id;
 	
 	private double euro;
@@ -20,6 +23,10 @@ public class Wallet {
 	//no-args Constructor
 	public Wallet()	{
 		
+	}
+	public Wallet(double euro, double coins) {
+		this.euro = euro;
+		this.coins = coins;
 	}
 	
 	public long getId() {
