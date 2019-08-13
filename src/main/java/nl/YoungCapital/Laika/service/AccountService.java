@@ -72,7 +72,7 @@ void initAccountDatabase() {
 	
 	account1.setWallet(new Wallet(1000, 1001));
 	account1.setCart(new Cart());
-	account1.setOrderhistory(new Orderhistory(LocalDateTime.now(), "Order1", false, 100.50));
+	account1.setOrderhistory(new Orderhistory());
 	accountrepository.save(account1);
 	
 	account2.setWallet(new Wallet(2000, 2002));
@@ -80,7 +80,6 @@ void initAccountDatabase() {
 //	cart1.setProductInCart(58L);
 	account2.setCart(cart1);
 	Orderhistory orderhistory1 = new Orderhistory();
-	orderhistory1.setAllOrders(cart1);
 	account2.setOrderhistory(orderhistory1);
 	accountrepository.save(account2);
 

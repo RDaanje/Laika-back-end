@@ -13,7 +13,7 @@ import javax.persistence.Id;
 public class Wallet {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
 	private double euro;

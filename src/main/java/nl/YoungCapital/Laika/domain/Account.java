@@ -17,7 +17,7 @@ public class Account {
 	@SequenceGenerator(name="seq", initialValue=1000, allocationSize=1)
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(length = 4000000)
 	private long id;
 	
@@ -43,7 +43,7 @@ public class Account {
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Cart cart;
 	
-	@OneToOne(cascade = {CascadeType.PERSIST})				
+	@OneToOne(cascade = {CascadeType.ALL})				
 	private Orderhistory orderhistory;
 	
 //	@ManyToOne

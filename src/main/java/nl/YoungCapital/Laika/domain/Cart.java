@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -32,22 +33,21 @@ import javax.persistence.OneToMany;
 public class Cart	{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	private double total;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn
-	
+	@JoinColumn	
 	private Account account;
 	
-	@OneToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	public Set<Product> productSet = new HashSet<Product>();
 	
 	private int totalProducts = 0;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@ManyToOne(cascade = {CascadeType.ALL})
 	private Orderhistory orderhistory;
 
 
@@ -106,7 +106,7 @@ public class Cart	{
 			this.total = this.total + (p.getPrice()*(p.getQuantity()));
 		}
 	}
-	
+	   
 //	public void minTotal(double total) {
 //		if(this.total-total<=0.5) {this.total = 0;}
 //		else {
