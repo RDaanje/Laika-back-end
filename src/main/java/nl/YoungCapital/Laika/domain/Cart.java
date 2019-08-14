@@ -37,7 +37,11 @@ public class Cart	{
 	private long id;
 
 	private double total;
+	private double totalCoins;
 	
+
+
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn	
 	private Account account;
@@ -102,9 +106,35 @@ public class Cart	{
 
 	public void setTotal2() {
 		this.total = 0;
+		this.totalCoins = 0;
 		for(Product p: productSet) {
 			this.total = this.total + (p.getPrice()*(p.getQuantity()));
+			this.totalCoins = this.totalCoins + (p.getPriceCoins()*p.getQuantity());
 		}
+	}
+	
+	public double getTotalCoins() {
+		return totalCoins;
+	}
+
+	public void setTotalCoins(double totalCoins) {
+		this.totalCoins = totalCoins;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public Orderhistory getOrderhistory() {
+		return orderhistory;
+	}
+
+	public void setOrderhistory(Orderhistory orderhistory) {
+		this.orderhistory = orderhistory;
 	}
 	   
 //	public void minTotal(double total) {

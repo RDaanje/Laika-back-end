@@ -126,6 +126,18 @@ public class AccountController {
 		return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);
 
 	}
+	
+	@PutMapping(path = "{id}/wallet/coins/{coins}")
+	public ResponseEntity<Account> addCoins(@PathVariable("id") long id, @PathVariable("coins") double coins) {
+		System.out.println(coins);
+		Optional<Account> accountcheck = accountService.findById(id);
+
+		Account accountOk = accountcheck.get();
+		accountOk.getWallet().setCoins(coins); 
+
+		return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);
+
+	}
 
 	@PutMapping(path = "{id}/update")
 	public Account accountUpdate(@PathVariable long id, @RequestBody Account account) {
@@ -139,7 +151,7 @@ public class AccountController {
 	public ResponseEntity<Account> addProductToCart(@PathVariable long id, @RequestBody Product product) {
 		Optional<Account> accountcheck = accountService.findById(id);
 
-		Product tempProduct = new Product(product.getName(), product.getSupplier(), product.getStock(), product.getPrice(), product.getImage());
+		Product tempProduct = new Product(product.getName(), product.getSupplier(), product.getStock(), product.getPrice(), product.getPriceCoins(), product.getImage());
 		
 		boolean foundProductInCart = false;
 		Account accountOk = accountcheck.get();
@@ -149,7 +161,7 @@ public class AccountController {
 				foundProductInCart = true;
 				p.setQuantity((p.getQuantity() + 1));
 				break;
-			}
+			} 
 
 		}
 		
@@ -175,7 +187,7 @@ public class AccountController {
 		boolean foundProductInCart = false;
 		for (Product p : accountOk.getCart().productSet) {
 
-			if (p.equals(productOk)) {
+			if (p.getName().equals(productOk.getName())) {
 				foundProductInCart = true;
 				p.setQuantity((p.getQuantity() - 1));
 				accountOk.getCart().setTotal2();
@@ -185,8 +197,8 @@ public class AccountController {
 					p.setQuantity(1);
 				}
 				break;
-			}
-		}
+			} 
+		} 
 
 		return new ResponseEntity<Account>(accountService.save(accountOk), HttpStatus.OK);
 	}

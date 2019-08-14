@@ -44,7 +44,7 @@ public class Wallet {
 	public double getCoins() {
 		return coins;
 	}
-	public void setCoins(int coins) {
-		this.coins = coins;
+	public void setCoins(double coins) {
+		this.coins += coins;
 	}
 }

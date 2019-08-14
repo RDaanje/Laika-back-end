@@ -19,11 +19,15 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id; 	
+	
+
 	private String name;
 	private String supplier;
 	private long stock;
 	private double price;
+	private double priceCoins;
 	private String image;
+	private String description;
 	private int quantity = 1;
 	
 	@ManyToOne(cascade = {CascadeType.ALL})
@@ -37,19 +41,41 @@ public class Product {
 
 
 	public Product (
-			String name, String supplier, long stock, double price, String image) {
+			String name, String supplier, long stock, double price, double priceCoins, String image, String description) {
 		
 		this.name = name;
 		this.supplier = supplier;
 		this.stock = stock;
 		this.price = price;
+		this.priceCoins = priceCoins;
 		this.image = image;
+		this.description = description;
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
 		Product p = (Product) obj;
 		return p.getName() == this.getName();
+	}
+	
+	public double getPriceCoins() {
+		return priceCoins;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
+	public void setPriceCoins(double priceCoins) {
+		this.priceCoins = priceCoins;
 	}
 	
 	public Cart getCart() {
