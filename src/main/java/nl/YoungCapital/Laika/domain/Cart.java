@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -32,22 +33,25 @@ import javax.persistence.OneToMany;
 public class Cart	{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	private double total;
+	private double totalCoins;
 	
+
+
+
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn
-	
+	@JoinColumn	
 	private Account account;
 	
-	@OneToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	public Set<Product> productSet = new HashSet<Product>();
 	
 	private int totalProducts = 0;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@ManyToOne(cascade = {CascadeType.ALL})
 	private Orderhistory orderhistory;
 
 
@@ -102,11 +106,37 @@ public class Cart	{
 
 	public void setTotal2() {
 		this.total = 0;
+		this.totalCoins = 0;
 		for(Product p: productSet) {
 			this.total = this.total + (p.getPrice()*(p.getQuantity()));
+			this.totalCoins = this.totalCoins + (p.getPriceCoins()*p.getQuantity());
 		}
 	}
 	
+	public double getTotalCoins() {
+		return totalCoins;
+	}
+
+	public void setTotalCoins(double totalCoins) {
+		this.totalCoins = totalCoins;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public Orderhistory getOrderhistory() {
+		return orderhistory;
+	}
+
+	public void setOrderhistory(Orderhistory orderhistory) {
+		this.orderhistory = orderhistory;
+	}
+	   
 //	public void minTotal(double total) {
 //		if(this.total-total<=0.5) {this.total = 0;}
 //		else {

@@ -13,7 +13,7 @@ import javax.persistence.Id;
 public class Wallet {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
 	private double euro;
@@ -44,7 +44,7 @@ public class Wallet {
 	public double getCoins() {
 		return coins;
 	}
-	public void setCoins(int coins) {
-		this.coins = coins;
+	public void setCoins(double coins) {
+		this.coins += coins;
 	}
 }
