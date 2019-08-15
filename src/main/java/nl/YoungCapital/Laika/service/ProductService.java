@@ -41,11 +41,11 @@ public void deleteById(Long id) {
 
 @PostConstruct
 void initProductDatabase() {
-	productRepository.save(new Product("Bert", "LaikaProduction", 10, 1.99, "assets/images/Bert.jpg"));
-	productRepository.save(new Product("Laika", "LaikaProduction", 101, 10.99, "assets/images/LaikaLogoDog.png"));
+	productRepository.save(new Product("Venus", "LaikaProduction", 10, 100.99, "assets/images/Venus.jpg"));
+	productRepository.save(new Product("Mercury", "LaikaProduction", 101, 199.99, "assets/images/Mercury.jpg"));
 	productRepository.save(new Product("Mars", "LaikaProduction", 11, 299.99, "assets/images/Mars.jpg"));
 	productRepository.save(new Product("Moon", "LaikaProduction", 12, 399.99, "assets/images/Moon.jpg"));
-	productRepository.save(new Product("Saturn", "LaikaProduction", 13, 499.99, "assets/images/Saturn.jpg"));
+	productRepository.save(new Product("Saturnus", "LaikaProduction", 13, 499.99, "assets/images/Saturn.jpg"));
 	productRepository.save(new Product("Sun", "LaikaProduction", 14, 99999.99, "assets/images/Sun.jpg"));
 
 
