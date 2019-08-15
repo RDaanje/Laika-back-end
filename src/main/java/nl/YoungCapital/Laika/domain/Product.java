@@ -38,8 +38,6 @@ public class Product {
 
 	public Product() {}
 	
-
-
 	public Product (
 			String name, String supplier, long stock, double price, double priceCoins, String image, String description) {
 		
@@ -66,13 +64,9 @@ public class Product {
 		return description;
 	}
 
-
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-
 
 	public void setPriceCoins(double priceCoins) {
 		this.priceCoins = priceCoins;
