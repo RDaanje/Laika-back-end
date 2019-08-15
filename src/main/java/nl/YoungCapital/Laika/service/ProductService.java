@@ -47,12 +47,20 @@ public void deleteById(Long id) {
 
 @PostConstruct
 void initProductDatabase() {
-	productRepository.save(new Product("Bert", "LaikaProduction", 10, 1.99,10, "assets/images/Bert.jpg","Bert is watching you"));
-	productRepository.save(new Product("Laika", "LaikaProduction", 101, 10.99,5, "assets/images/LaikaLogoDog.png",""));
-	productRepository.save(new Product("Mars", "LaikaProduction", 11, 299.99,50, "assets/images/Mars.jpg",""));
-	productRepository.save(new Product("Moon", "LaikaProduction", 12, 399.99,100, "assets/images/Moon.jpg",""));
-	productRepository.save(new Product("Saturn", "LaikaProduction", 13, 499.99,200, "assets/images/Saturn.jpg",""));
-	productRepository.save(new Product("Sun", "LaikaProduction", 14, 99999.99,300, "assets/images/Sun.jpg",""));
+	
+//	productRepository.save(new Product("Bert", "LaikaProduction", 10, 1.99,10, "assets/images/Bert.jpg","Bert is watching you"));
+	productRepository.save(new Product("Laika cap", "LaikaProduction", 100, 12.00,3000,"assets/images/Pet.png","For everyday adventures outdoors. The Laika Cap has an adjustable back strap and embroidered logo details."));
+	productRepository.save(new Product("Laika t-shirt", "LaikaProduction", 100, 15.00, 3500, "assets/images/Shirt.png", "The official Laika t-shirt."));
+	productRepository.save(new Product("Laika vest", "LaikaProduction", 100, 25.00, 4500, "assets/images/Vest.png", "To keep your warm during all your epic adventures in space."));
+	productRepository.save(new Product("Laika Phone case", "LaikaProduction", 100, 20.00, 2500, "assets/images/case.png", "Protect your mobile phone with our special Laika phone case." ));
+	
+	
+	
+//	productRepository.save(new Product("Laika", "LaikaProduction", 101, 10.99,5, "assets/images/LaikaLogoDog.png",""));
+	productRepository.save(new Product("Mars", "LaikaProduction", 11, 5.00,50, "assets/images/Mars.jpg","The special Laika Mars wallpaper"));
+	productRepository.save(new Product("Moon", "LaikaProduction", 12, 5.00,50, "assets/images/Moon.jpg","The Very special Laika Moon wallpaper"));
+	productRepository.save(new Product("Saturn", "LaikaProduction", 13, 5.00,50, "assets/images/Saturn.jpg","The Mega special Laika Saturn wallpaper"));
+	productRepository.save(new Product("Sun", "LaikaProduction", 14,5.00,100, "assets/images/Sun.jpg","The Ultra special Laika Sun wallpaper"));
 
 
 	}

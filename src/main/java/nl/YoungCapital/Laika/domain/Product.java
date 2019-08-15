@@ -49,7 +49,7 @@ public class Product {
 		this.price = price;
 		this.priceCoins = priceCoins;
 		this.image = image;
-		this.description = description;
+		this.description = description; 
 	}
 	
 	@Override
