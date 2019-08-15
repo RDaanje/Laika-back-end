@@ -141,7 +141,7 @@ public class AccountController {
 
 	@PutMapping(path = "{id}/update")
 	public Account accountUpdate(@PathVariable long id, @RequestBody Account account) {
-		Optional<Account> accountCheck = accountService.findById(account.getId());
+		Optional<Account> accountCheck = accountService.findById(account.getId()); 
 		System.out.println(account);
 	
 		return accountService.save(account);
@@ -151,7 +151,7 @@ public class AccountController {
 	public ResponseEntity<Account> addProductToCart(@PathVariable long id, @RequestBody Product product) {
 		Optional<Account> accountcheck = accountService.findById(id);
 
-		Product tempProduct = new Product(product.getName(), product.getSupplier(), product.getStock(), product.getPrice(), product.getPriceCoins(), product.getImage());
+		Product tempProduct = new Product(product.getName(), product.getSupplier(), product.getStock(), product.getPrice(), product.getPriceCoins(), product.getImage(),product.getDescription());
 		
 		boolean foundProductInCart = false;
 		Account accountOk = accountcheck.get();

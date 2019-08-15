@@ -58,34 +58,35 @@ public class AccountService {
 
 	// Deletes an account 
 	public void deleteById(Long id) {
-		accountrepository.deleteById(id);
+		accountrepository.deleteById(id); 
 	}
 	
 @PostConstruct
 void initAccountDatabase() {
 
 	Account account3 =accountrepository.save(new Account("", "", "admin", "admin", "admin", "", "", "", "",true));
-	Account account1 = accountrepository.save(new Account("Laika", "Isweg", "L", "password", "email", "Moonstreet", "1", "1111LA", "Moontown",false));
-	Account account2 = accountrepository.save(new Account("Bert", "Isonderweg", "B", "password", "email", "Rocketstreet", "22", "2222LA", "Rocketcity", false));
+	Account account1 = accountrepository.save(new Account("Roelof", "Daanje", "RD1993", "RD1993","R@gmail.com", "Dorpstraat", "1", "1111AB","Groningen",false));
+	accountrepository.save(new Account("Laika", "Isweg", "L", "password", "email", "Moonstreet", "1", "1111LA", "Moontown",false));
+//	Account account2 = accountrepository.save(new Account("Bert", "Isonderweg", "B", "password", "email", "Rocketstreet", "22", "2222LA", "Rocketcity", false));
 
 	
 	
-	account1.setWallet(new Wallet(1000, 1001));
+	account1.setWallet(new Wallet(50, 50));
 	account1.setCart(new Cart());
 	account1.setOrderhistory(new Orderhistory());
 	accountrepository.save(account1);
 	
-	account2.setWallet(new Wallet(2000, 2002));
-	Cart cart1 = new Cart();
+//	account2.setWallet(new Wallet(2000, 2002));
+//	Cart cart1 = new Cart();
 //	cart1.setProductInCart(58L);
-	account2.setCart(cart1);
-	Orderhistory orderhistory1 = new Orderhistory();
-	account2.setOrderhistory(orderhistory1);
-	accountrepository.save(account2);
+//	account2.setCart(cart1);
+//	Orderhistory orderhistory1 = new Orderhistory();
+//	account2.setOrderhistory(orderhistory1);
+//	accountrepository.save(account2);
 
 	account3.setOrderhistory(new Orderhistory());
 	accountrepository.save(account3);
 
-}
+}  
 
 }
